@@ -557,8 +557,8 @@ section {
 
 /* ---------- Footer Styles ---------- */
 .footer {
-  background-color: var(--background-dark);
-  color: var(--text-light);
+  background-color: var(--background-dark) !important;
+  color: var(--text-light) !important;
   padding: 60px 0 20px;
 }
 
@@ -663,6 +663,18 @@ section {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   font-size: 14px;
   opacity: 0.8;
+}
+.copyright a{
+  color: #FFD700;
+}
+.footer-contact a {
+  color: var(--text-light);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-contact a:hover {
+  color: var(--secondary-color);
 }
 
 /* ---------- Back to Top Button ---------- */
