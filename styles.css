@@ -102,9 +102,15 @@ img {
   margin-right: 8px;
 }
 
-/* Section Styling */
+/* ---------- Section Styling ---------- */
 section {
-  padding: 80px 0;
+  padding: 80px 20px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .section-heading {
@@ -113,7 +119,7 @@ section {
 }
 
 .section-heading h2 {
-  font-size: 36px;
+  font-size: clamp(28px, 5vw, 36px);
   color: var(--accent-color);
   margin-bottom: 15px;
   font-weight: 700;
@@ -123,11 +129,20 @@ section {
   color: var(--text-light);
 }
 
+.section-heading p {
+  font-size: clamp(14px, 2vw, 16px);
+  line-height: 1.6;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .divider {
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
+  margin: 15px 0;
 }
 
 .divider::before,
@@ -152,6 +167,24 @@ section {
 .center-btn {
   text-align: center;
   margin-top: 30px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 25px;
+  background-color: var(--primary-color);
+  color: var(--text-light);
+  border-radius: 5px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: var(--accent-color);
+  transform: translateY(-3px);
 }
 
 /* ---------- Header Styles ---------- */
@@ -180,23 +213,23 @@ section {
 
 .logo img {
   height: 60px;
+  width: auto;
   margin-right: 15px;
 }
 
 .temple-name h1 {
-  font-size: 18px;
+  font-size: clamp(16px, 2.5vw, 18px);
   color: var(--accent-color);
   margin: 0;
-  
 }
 
 .temple-name p {
-  font-size: 14px;
+  font-size: clamp(13px, 2vw, 14px);
   color: var(--text-dark);
 }
 
 .temple-name span {
-  font-size: 12px;
+  font-size: clamp(11px, 1.8vw, 12px);
   color: var(--text-dark);
   opacity: 0.8;
 }
@@ -204,6 +237,8 @@ section {
 .main-nav ul {
   display: flex;
   list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .main-nav ul li {
@@ -215,6 +250,8 @@ section {
   font-weight: 500;
   position: relative;
   padding: 5px 0;
+  text-decoration: none;
+  font-size: clamp(14px, 2vw, 15px);
 }
 
 .main-nav ul li a:hover,
@@ -243,8 +280,176 @@ section {
   cursor: pointer;
   font-size: 24px;
   color: var(--accent-color);
+  background: transparent;
+  border: none;
+  padding: 5px;
 }
 
+/* Mobile menu */
+.mobile-nav {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 250px;
+  height: 100vh;
+  background-color: var(--text-light);
+  z-index: 1001;
+  padding: 20px;
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+  transition: right 0.3s ease;
+  overflow-y: auto;
+}
+
+.mobile-nav.active {
+  right: 0;
+}
+
+.mobile-nav-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  color: var(--accent-color);
+  cursor: pointer;
+}
+
+.mobile-nav ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 60px;
+}
+
+.mobile-nav ul li {
+  margin-bottom: 15px;
+}
+
+.mobile-nav ul li a {
+  color: var(--text-dark);
+  font-weight: 500;
+  font-size: 16px;
+  text-decoration: none;
+  display: block;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  transition: color 0.3s ease;
+}
+
+.mobile-nav ul li a:hover,
+.mobile-nav ul li a.active {
+  color: var(--primary-color);
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Sticky header */
+.header.sticky {
+  padding: 5px 0;
+  background-color: rgba(255, 255, 255, 0.95);
+}
+
+.header.sticky .logo img {
+  height: 50px;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 992px) {
+  section {
+    padding: 60px 15px;
+  }
+  
+  .section-heading {
+    margin-bottom: 40px;
+  }
+  
+  .divider::before,
+  .divider::after {
+    width: 40px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .main-nav {
+    display: none;
+  }
+  
+  .mobile-menu-btn {
+    display: block;
+  }
+  
+  .header .container {
+    padding: 10px 15px;
+  }
+  
+  .logo img {
+    height: 50px;
+  }
+  
+  section {
+    padding: 50px 15px;
+  }
+  
+  .section-heading {
+    margin-bottom: 30px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .logo img {
+    height: 40px;
+    margin-right: 10px;
+  }
+  
+  section {
+    padding: 40px 15px;
+  }
+  
+  .section-heading h2 {
+    margin-bottom: 10px;
+  }
+  
+  .divider::before,
+  .divider::after {
+    width: 30px;
+    margin: 0 10px;
+  }
+  
+  .divider-symbol {
+    font-size: 20px;
+  }
+  
+  .center-btn {
+    margin-top: 20px;
+  }
+  
+  .btn {
+    padding: 10px 20px;
+  }
+}
+
+/* For large screens */
+@media screen and (min-width: 1400px) {
+  .container {
+    max-width: 1300px;
+  }
+}
 /* ---------- Hero Section Styles ---------- */
 .hero-section {
   height: 100vh;
@@ -260,6 +465,7 @@ section {
 .parallax-container {
   position: relative;
   overflow: hidden;
+  width: 100%;
 }
 
 .parallax-bg {
@@ -278,7 +484,7 @@ section {
 .events-bg {
   background-image: url('https://img.freepik.com/premium-vector/durga-pupa-frame-13_230402-375.jpg?uid=R187221611&ga=GA1.1.1335266347.1741071517&semt=ais_hybrid');
   filter: brightness(0.7);
-  height: 190%;;
+  height: 190%;
 }
 
 .hero-content {
@@ -287,7 +493,8 @@ section {
   padding: 20px;
   position: relative;
   z-index: 1;
-  max-width: 800px;
+  max-width: 90%;
+  width: 800px;
 }
 
 .hero-section::before {
@@ -302,20 +509,20 @@ section {
 }
 
 .hero-content h2 {
-  font-size: 30px;
+  font-size: clamp(24px, 5vw, 30px);
   margin-bottom: 15px;
   font-weight: 700;
 }
 
 .hero-content h3 {
-  font-size: 20px;
+  font-size: clamp(18px, 4vw, 20px);
   margin-bottom: 20px;
 }
 
 .hero-content p {
-  font-size: 15px;
+  font-size: clamp(14px, 3vw, 15px);
   margin-bottom: 30px;
-  max-width: 700px;
+  max-width: 100%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -324,11 +531,58 @@ section {
   display: flex;
   justify-content: center;
   gap: 20px;
+  flex-wrap: wrap;
 }
 
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+  .hero-content {
+    padding: 15px;
+  }
+  
+  .hero-buttons {
+    gap: 10px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .hero-section {
+    height: 90vh; /* Slightly smaller on very small screens */
+  }
+  
+  .hero-content {
+    padding: 10px;
+  }
+  
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .hero-buttons a, 
+  .hero-buttons button {
+    width: 80%;
+    margin-bottom: 10px;
+  }
+}
+
+/* For large screens */
+@media screen and (min-width: 1200px) {
+  .hero-content {
+    max-width: 800px;
+  }
+}
+
+/* Fix for iOS Safari 100vh issue */
+@supports (-webkit-touch-callout: none) {
+  .hero-section {
+    height: -webkit-fill-available;
+  }
+}
 /* ---------- Introduction Section Styles ---------- */
 .intro-section {
   background-color: var(--background-light);
+  padding: 60px 20px;
 }
 
 .intro-content {
@@ -336,30 +590,59 @@ section {
   grid-template-columns: 1fr 1fr;
   gap: 40px;
   align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .intro-image {
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 10px 30px var(--shadow-color);
+  width: 100%;
+  height: auto;
+}
+
+.intro-image img {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 .intro-text p {
   margin-bottom: 20px;
   text-align: justify;
   font-weight: bold;
-  font-size:14px;
+  font-size: clamp(13px, 2vw, 14px);
+  line-height: 1.6;
+}
+
+.intro-text h2 {
+  font-size: clamp(24px, 4vw, 30px);
+  margin-bottom: 20px;
 }
 
 /* ---------- Divine Blessings Section Styles ---------- */
 .blessings-section {
   background-color: var(--background-medium);
+  padding: 60px 20px;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.section-header h2 {
+  font-size: clamp(24px, 4vw, 30px);
+  margin-bottom: 15px;
 }
 
 .blessings-cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .blessing-card {
@@ -369,6 +652,10 @@ section {
   text-align: center;
   box-shadow: 0 5px 15px var(--shadow-color);
   transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .blessing-card:hover {
@@ -383,21 +670,92 @@ section {
 }
 
 .blessing-card h3 {
-  font-size: 20px;
+  font-size: clamp(18px, 3vw, 20px);
   margin-bottom: 15px;
   color: var(--accent-color);
 }
-/* events */
+
+.blessing-card p {
+  font-size: clamp(13px, 2vw, 14px);
+  line-height: 1.5;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 992px) {
+  .intro-content {
+    gap: 30px;
+  }
+  
+  .blessing-card {
+    padding: 25px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .intro-section,
+  .blessings-section {
+    padding: 40px 15px;
+  }
+  
+  .intro-content {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  
+  .intro-image {
+    order: 1;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  .intro-text {
+    order: 2;
+  }
+  
+  .blessings-cards {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .intro-section,
+  .blessings-section {
+    padding: 30px 15px;
+  }
+  
+  .section-header {
+    margin-bottom: 30px;
+  }
+  
+  .blessing-card {
+    padding: 20px;
+  }
+  
+  .card-icon {
+    font-size: 32px;
+    margin-bottom: 15px;
+  }
+}
+
+/* For large screens */
+@media screen and (min-width: 1400px) {
+  .intro-content,
+  .blessings-cards {
+    max-width: 1300px;
+  }
+}
+/* ---------- Events Section Styles ---------- */
 .events-preview {
-  padding: 100px 0;
+  padding: 80px 20px;
   color: var(--text-light);
   position: relative;
   background-image: url('https://img.freepik.com/premium-photo/illustration-traditional-hindu-background-concept_1342608-4243.jpg?semt=ais_hybrid');
   background-size: cover;
   background-position: center;
+  background-attachment: fixed; /* Adds a nice parallax effect */
 }
 
-/* Add this to create an overlay for better text readability */
+/* Overlay for better text readability */
 .events-preview::before {
   content: '';
   position: absolute;
@@ -409,10 +767,29 @@ section {
   z-index: 0;
 }
 
-/* Make sure container is above the overlay */
+/* Container positioning above overlay */
 .events-preview .container {
   position: relative;
   z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.events-preview .section-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.events-preview .section-header h2 {
+  font-size: clamp(24px, 4vw, 30px);
+  margin-bottom: 15px;
+}
+
+.events-preview .section-header p {
+  font-size: clamp(14px, 2vw, 16px);
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
 }
 
 /* Horizontal layout for events */
@@ -422,6 +799,7 @@ section {
   flex-wrap: wrap;
   justify-content: center;
   max-width: 1100px;
+  margin: 0 auto;
 }
 
 .events-list.horizontal .event-item {
@@ -431,24 +809,132 @@ section {
   flex-grow: 0;
 }
 
-/* For smaller screens */
-@media (max-width: 768px) {
-  .events-list.horizontal .event-item {
-    width: 100%;
-  }
-}
-
 .event-item {
   display: flex;
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  transition: transform var(--transition-speed) ease;
+  transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+  height: 100%;
 }
 
 .event-item:hover {
   transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.event-date {
+  background-color: var(--primary-color);
+  color: var(--text-light);
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 80px;
+  text-align: center;
+}
+
+.event-date .day {
+  font-size: clamp(20px, 3vw, 24px);
+  font-weight: 700;
+}
+
+.event-date .month {
+  font-size: clamp(14px, 2vw, 16px);
+  text-transform: uppercase;
+}
+
+.event-info {
+  padding: 15px 20px;
+  flex-grow: 1;
+}
+
+.event-info h3 {
+  font-size: clamp(16px, 2.5vw, 18px);
+  margin-bottom: 10px;
+}
+
+.event-info p {
+  font-size: clamp(13px, 2vw, 14px);
+  margin-bottom: 10px;
+  opacity: 0.9;
+  line-height: 1.5;
+}
+
+.event-time,
+.event-location {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: clamp(12px, 1.8vw, 13px);
+  margin-bottom: 5px;
+}
+
+.event-time i,
+.event-location i {
+  font-size: clamp(14px, 2vw, 16px);
+  color: var(--accent-color);
+}
+
+/* Responsive styles */
+@media screen and (max-width: 992px) {
+  .events-preview {
+    padding: 60px 15px;
+  }
+  
+  .events-list.horizontal {
+    gap: 15px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .events-preview {
+    padding: 50px 15px;
+    background-attachment: scroll; /* Better mobile performance */
+  }
+  
+  .events-list.horizontal .event-item {
+    width: 100%;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .events-preview .section-header {
+    margin-bottom: 30px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .events-preview {
+    padding: 40px 15px;
+  }
+  
+  .event-date {
+    padding: 10px;
+    min-width: 70px;
+  }
+  
+  .event-info {
+    padding: 12px 15px;
+  }
+  
+  .event-time,
+  .event-location {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
+  }
+}
+
+/* For large screens */
+@media screen and (min-width: 1400px) {
+  .events-preview .container,
+  .events-list.horizontal {
+    max-width: 1300px;
+  }
 }
 
 /* Rest of your styles remain the same */
@@ -457,6 +943,17 @@ section {
 /* ---------- Testimonials Section Styles ---------- */
 .testimonials-section {
   background-color: var(--background-light);
+  padding: 60px 20px;
+}
+
+.testimonials-section .section-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.testimonials-section .section-header h2 {
+  font-size: clamp(24px, 4vw, 30px);
+  margin-bottom: 15px;
 }
 
 .testimonials-slider {
@@ -489,16 +986,61 @@ section {
   opacity: 0.5;
 }
 
+.testimonial-content p {
+  font-size: clamp(14px, 2vw, 16px);
+  line-height: 1.6;
+}
+
 .testimonial-author {
   text-align: right;
   margin-top: 20px;
   font-style: italic;
   color: var(--accent-color);
+  font-size: clamp(13px, 1.8vw, 15px);
+}
+
+/* Slider navigation */
+.slider-nav {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.slider-nav button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--text-light);
+  border: none;
+  color: var(--primary-color);
+  cursor: pointer;
+  box-shadow: 0 2px 5px var(--shadow-color);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slider-nav button:hover {
+  background-color: var(--primary-color);
+  color: var(--text-light);
 }
 
 /* ---------- Location Section Styles ---------- */
 .location-section {
   background-color: var(--background-medium);
+  padding: 60px 20px;
+}
+
+.location-section .section-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.location-section .section-header h2 {
+  font-size: clamp(24px, 4vw, 30px);
+  margin-bottom: 15px;
 }
 
 .location-content {
@@ -506,20 +1048,35 @@ section {
   grid-template-columns: 1fr 1fr;
   gap: 40px;
   align-items: start;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .map-container {
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 10px 30px var(--shadow-color);
+  height: 100%;
+  min-height: 350px;
+}
+
+.map-container iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 350px;
+  border: none;
+  display: block;
 }
 
 .temple-address {
   padding: 20px;
+  background-color: var(--text-light);
+  border-radius: 10px;
+  box-shadow: 0 5px 15px var(--shadow-color);
 }
 
 .temple-address h3 {
-  font-size: 24px;
+  font-size: clamp(20px, 3vw, 24px);
   color: var(--accent-color);
   margin-bottom: 20px;
 }
@@ -527,20 +1084,29 @@ section {
 .temple-address p {
   margin-bottom: 15px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  font-size: clamp(14px, 2vw, 16px);
+  line-height: 1.5;
 }
 
 .temple-address p i {
   margin-right: 10px;
   color: var(--primary-color);
-  font-size: 18px;
+  font-size: clamp(16px, 2.5vw, 18px);
   width: 25px;
   text-align: center;
+  margin-top: 3px;
 }
 
 .temple-timings {
   margin-top: 30px;
   margin-bottom: 30px;
+}
+
+.temple-timings h4 {
+  font-size: clamp(18px, 2.5vw, 20px);
+  margin-bottom: 15px;
+  color: var(--accent-color);
 }
 
 .timing {
@@ -549,12 +1115,119 @@ section {
   margin-bottom: 10px;
   padding-bottom: 10px;
   border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
+  font-size: clamp(13px, 2vw, 15px);
 }
 
 .timing .day {
   font-weight: 600;
 }
 
+.contact-btn {
+  display: inline-block;
+  background-color: var(--primary-color);
+  color: var(--text-light);
+  padding: 12px 25px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.contact-btn:hover {
+  background-color: var(--accent-color);
+}
+
+/* Responsive styles */
+@media screen and (max-width: 992px) {
+  .testimonials-section,
+  .location-section {
+    padding: 50px 15px;
+  }
+  
+  .location-content {
+    gap: 30px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .testimonials-section,
+  .location-section {
+    padding: 40px 15px;
+  }
+  
+  .testimonials-section .section-header,
+  .location-section .section-header {
+    margin-bottom: 30px;
+  }
+  
+  .testimonial {
+    padding: 25px;
+  }
+  
+  .location-content {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+  
+  .map-container {
+    order: 2;
+  }
+  
+  .temple-address {
+    order: 1;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .testimonials-section,
+  .location-section {
+    padding: 30px 15px;
+  }
+  
+  .testimonial {
+    padding: 20px;
+  }
+  
+  .testimonial-content {
+    padding-left: 25px;
+  }
+  
+  .testimonial-content::before {
+    font-size: 40px;
+  }
+  
+  .slider-nav button {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .temple-address {
+    padding: 15px;
+  }
+  
+  .temple-timings {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .timing {
+    flex-direction: column;
+    gap: 5px;
+  }
+}
+
+/* For large screens */
+@media screen and (min-width: 1400px) {
+  .location-content {
+    max-width: 1300px;
+  }
+  
+  .testimonials-slider {
+    max-width: 900px;
+  }
+}
 /* ---------- Footer Styles ---------- */
 .footer {
   background-color: var(--background-dark) !important;
